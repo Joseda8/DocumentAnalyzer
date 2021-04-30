@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import LogIn from '../home/login/login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +37,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
+type Props = {
+  title: string,
+  children: JSX.Element,
+};
+
+export default function Home({ title, children }: Props) {
   const classes = useStyles();
 
   return (
@@ -54,11 +58,9 @@ export default function Home() {
           
           <h1>Document Analyzer</h1>
 
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+          <Typography component="h1" variant="h5"> {title} </Typography>
           
-          <LogIn message="Hello there!"></LogIn>
+          {children}
           
         </div>
       </Grid>
@@ -71,5 +73,3 @@ export default function Home() {
 
 
 // import "./home.scss"
-// 
-//
