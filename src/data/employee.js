@@ -3,7 +3,7 @@ const employees = [
         id: 7,
         employeeName: "Ash Ketchum", 
         count: 200,
-        documents:[{name: "Kanto", qty: 300}, {name: "Johto", qty: 250}]
+        documents: [{name: "Kanto", qty: 300}, {name: "Johto", qty: 250}]
     },
     {
         id: 8,

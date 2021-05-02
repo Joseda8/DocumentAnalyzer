@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Input } from '@material-ui/core';
+import Button from "@material-ui/core/Button";
 
 type MyProps = {
 };
@@ -106,10 +108,10 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <input type="file" multiple onChange={this.uploadFiles} />
-                    <button onClick={this.uploadFilesBlob}>Upload files</button>
-                    <PositionedSnackbar message={this.state.errorMessage} open_msg={this.state.open} close={this.notify} />
+                    <Input type="file" onChange={this.uploadFiles} />
+                    <Button style={{ backgroundColor: "#5D5C61", color: "white", textTransform: 'capitalize' }}  variant="contained" onClick={this.uploadFilesBlob}>Upload files</Button>
                 </CardActions>
+                <PositionedSnackbar message={this.state.errorMessage} open_msg={this.state.open} close={this.notify} />
                 <br/>
             </Card>
             </>

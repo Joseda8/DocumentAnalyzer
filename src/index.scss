@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  color: $dark;
+  text-decoration: none;
+}
+
+a:hover{
+  color: $light-blue;
+  font-weight: bold;
+}

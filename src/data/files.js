@@ -3,7 +3,7 @@ const files = [
     id: 1,
     title: 'Speech.pdf',
     status: true,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Kurt Cobain", qty: 27}
@@ -14,7 +14,7 @@ const files = [
     id: 2,
     title: 'LoveLetter.txt',
     status: true,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -26,7 +26,7 @@ const files = [
     id: 3,
     title: 'AnotherLetter.docx',
     status: false,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "Billie Joe Armstrong", qty: 15},
         {name: "Ash Ketchum", qty: 200},
@@ -37,7 +37,7 @@ const files = [
     id: 4,
     title: 'LoveLetter.txt',
     status: false,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -49,7 +49,7 @@ const files = [
     id: 5,
     title: 'LoveLetter.txt',
     status: true,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -61,7 +61,7 @@ const files = [
     id: 6,
     title: 'El quijote.txt',
     status: false,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -73,7 +73,7 @@ const files = [
     id: 7,
     title: 'LoveLetter.txt',
     status: false,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -85,7 +85,7 @@ const files = [
     id: 8,
     title: 'LoveLetter.txt',
     status: true,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
         {name: "Billie Joe Armstrong", qty: 15},
@@ -97,11 +97,8 @@ const files = [
     id: 9,
     title: 'LoveLetter.txt',
     status: true,
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
-        {name: "José Montoya", qty: 8},
-        {name: "Billie Joe Armstrong", qty: 15},
-        {name: "Ash Ketchum", qty: 200},
     ],
     owner: "Jane Doe"
 },
@@ -109,7 +106,7 @@ const files = [
     id: 10,
     status: true,
     title: 'HolyBlible.pdf',
-    url: 'https://soafiles.blob.core.windows.net/files/WeeklyActivity4 - Inglés especializado.pdf',
+    url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "Dios", qty: 8888},
     ],
