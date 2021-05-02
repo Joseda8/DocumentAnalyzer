@@ -5,6 +5,10 @@ import DataTable from "../../../helpers/table";
 import GenericModal from "../../../helpers/generic-modal";
 import files from "../../../data/files";
 import { Typography } from '@material-ui/core';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ExplicitIcon from '@material-ui/icons/Explicit';
+import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -49,7 +53,61 @@ const columns: GridColDef[] = [
         }
         return <Button style={{ backgroundColor: "#5D5C61", color: "white", textTransform: 'capitalize' }} variant="contained" disabled>Not processed</Button>
     }
-  }
+  },
+
+  {
+    field: 'feelings',
+    headerName: 'Feelings',
+    description: 'This column is not sortable.',
+    sortable: false,
+    width: 400,
+    headerAlign: 'left',
+    align: "left",
+
+    renderCell: (params: GridValueGetterParams) => {
+        const status: boolean = !!params.getValue("status")!;
+        const feelings: any = params.getValue("feelings")!;
+
+        const items: JSX.Element[] = [];
+        feelings.forEach(function (value: string) {
+          items.push(<Tooltip title={value}><DescriptionIcon /></Tooltip>);
+        }); 
+
+        if(status){
+          if(feelings.length === 0){
+            return <Typography>No feelings detected</Typography>
+          }
+          return <Typography>{items}</Typography>;
+        }
+        return <Typography>Not processed</Typography>
+    }
+  },
+
+  {
+    field: 'obscene_language',
+    headerName: 'Obscene language',
+    description: 'This column is not sortable.',
+    sortable: false,
+    width: 400,
+    headerAlign: 'left',
+    align: "left",
+
+    renderCell: (params: GridValueGetterParams) => {
+        const status: boolean = !!params.getValue("status")!;
+        const is_obscene: boolean = !!params.getValue("obscene_language")!;
+
+        if(status){
+          if(is_obscene){
+            return <Tooltip title="This document contains obscene language"><ExplicitIcon /></Tooltip>
+          } else {
+            return <Tooltip title="This document is child friendly"><ChildFriendlyIcon /></Tooltip>
+          }
+        }
+
+        return <Typography>Not processed</Typography>
+    }
+  },
+
 ];
 
 // const define_rows = [
