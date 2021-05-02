@@ -49,7 +49,11 @@ const columns: GridColDef[] = [
           if(documents.length === 0){
             return <Button style={{ backgroundColor: "#379683", color: "white", textTransform: 'capitalize' }} variant="contained" disabled>No matches</Button>
           }
-          return <GenericModal>{items}</GenericModal>;
+          return <GenericModal>
+                  <h2>Employees in documents</h2>
+                  <hr/>
+                  {items}
+                </GenericModal>;
         }
         return <Button style={{ backgroundColor: "#5D5C61", color: "white", textTransform: 'capitalize' }} variant="contained" disabled>Not processed</Button>
     }
