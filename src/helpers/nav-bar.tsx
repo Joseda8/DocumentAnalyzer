@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: any;
   index: any;
   value: any;
 }

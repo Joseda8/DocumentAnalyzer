@@ -145,6 +145,8 @@ export default  class LogIn extends React.Component<MyProps, MyState> {
                     control={<Checkbox color="primary" onChange={this.onChange}/>}
                     label="Show password"
                   />
+                  <br/>
+                  <br/>
                   <Button
                     type="submit"
                     fullWidth

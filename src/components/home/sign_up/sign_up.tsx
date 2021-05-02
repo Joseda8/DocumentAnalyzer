@@ -188,7 +188,6 @@ export default  class SignUp extends React.Component<MyProps, MyState> {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    autoFocus
                     onChange={this.handleChange}
                   />
                   <TextField
@@ -219,6 +218,8 @@ export default  class SignUp extends React.Component<MyProps, MyState> {
                     control={<Checkbox color="primary" onChange={this.handleChange}/>}
                     label="Show password"
                   />
+                  <br/>
+                  <br/>
                   <Button
                     type="submit"
                     fullWidth
