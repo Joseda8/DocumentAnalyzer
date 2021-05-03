@@ -4,6 +4,8 @@ import { GridColDef, GridValueGetterParams } from "@material-ui/data-grid";
 import DataTable from "../../../helpers/table";
 import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import SyncIcon from '@material-ui/icons/Sync';
 import employee from "../../../data/employee";
 
 const columns: GridColDef[] = [
@@ -72,8 +74,12 @@ export default (() => {
 
     return (
         <>
-          <button onClick={onClick}>Test Change</button>
-          <h2>Results employees</h2>
+          <h2>
+            Results employees
+            <IconButton onClick={onClick}>
+              <SyncIcon />
+            </IconButton>
+          </h2>
           <DataTable  rows={data} columns={columns} pageSize={5} height={400}/>
         </>
     );

@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Input } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
 
 type MyProps = {
@@ -71,13 +72,18 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
         this.setErrorMessage("Loading...");
         this.objectStorage.uploadFiles(files, (response: any) => {
             this.setCanClose(true);
-            let url = response[0]._response.request.url;
-            url = url.slice(0, url.indexOf("?"));
-            let title = files[0].name;
+        
+            const files_to_send: any = [];
+            response.forEach(function (value: any, index: number) {
+                let url = value._response.request.url;
+                url = url.slice(0, url.indexOf("?"));
+                const title = files[index].name;
+
+                files_to_send.push({url: url, title: title});
+            }); 
             
             const body = {
-                url: url,
-                title: title,
+                files: files_to_send,
             };
             
             this.setErrorMessage("Files uploaded");
@@ -87,33 +93,49 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
             //     //console.log(response);
             // });
             
-            
-            console.log(url);
-            console.log(title);
         });
       }
 
       render() {
         return (
             <>
-            <h2>Welcome to DocumentAnalyzer!</h2>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+            <h1 style={{textAlign: 'center'}}>Welcome to DocumentAnalyzer!</h1>
+        </Grid>
+
+        <Grid item xs={12}>
             <Card>
                 <br/>
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        Upload files
-                    </Typography>
-                    <Typography color="textSecondary">
-                        This action will start the analysis
-                    </Typography>
-                </CardContent>
+                <Grid item xs={12}>
+                    <CardContent>
+                        <Typography variant="h4" component="h2" style={{textAlign: 'center'}}>
+                            Upload files
+                        </Typography>
+                        <Typography color="textSecondary" style={{textAlign: 'center'}}>
+                            This action will start the analysis
+                        </Typography>
+                    </CardContent>
+                </Grid>
                 <CardActions>
-                    <Input type="file" onChange={this.uploadFiles} />
-                    <Button style={{ backgroundColor: "#5D5C61", color: "white", textTransform: 'capitalize' }}  variant="contained" onClick={this.uploadFilesBlob}>Upload files</Button>
+                    <Grid item xs={12}>
+                        <h5 style={{textAlign: 'center'}}><Input inputProps={{ multiple: true }} type="file" onChange={this.uploadFiles} style={{alignContent: 'center'}}/></h5>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <h5 style={{textAlign: 'center'}}>
+                            <Button style={{ backgroundColor: "#5D5C61", color: "white", textTransform: 'capitalize', alignContent: "center" }}  variant="contained" onClick={this.uploadFilesBlob}>Upload files</Button>
+                        </h5>
+                    </Grid>
                 </CardActions>
                 <PositionedSnackbar message={this.state.errorMessage} open_msg={this.state.open} close={this.notify} />
                 <br/>
             </Card>
+        </Grid>
+
+      </Grid>
+            
             </>
         );
       }
