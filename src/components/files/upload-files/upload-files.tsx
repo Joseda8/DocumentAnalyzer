@@ -83,16 +83,15 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
             }); 
             
             const body = {
-                files: files_to_send,
+                files: [files_to_send],
             };
             
             this.setErrorMessage("Files uploaded");
-            console.log(body);
+            console.log("BODY", body);
             // axios.post(urlAPI + 'documents/notify', body).then((response) => {
             //     //document.getElementById("message_to_user").innerHTML = "Server received the file successfully";
             //     //console.log(response);
             // });
-            
         });
       }
 
