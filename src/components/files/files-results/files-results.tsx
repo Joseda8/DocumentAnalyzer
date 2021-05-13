@@ -4,12 +4,14 @@ import { GridColDef, GridValueGetterParams } from "@material-ui/data-grid";
 import DataTable from "../../../helpers/table";
 import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
-import DescriptionIcon from '@material-ui/icons/Description';
 import ExplicitIcon from '@material-ui/icons/Explicit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import Tooltip from '@material-ui/core/Tooltip';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import files from "../../../data/files";
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -74,8 +76,16 @@ const columns: GridColDef[] = [
         const feelings: any = params.getValue("feelings")!;
 
         const items: JSX.Element[] = [];
-        feelings.forEach(function (value: string) {
-          items.push(<Tooltip title={value}><DescriptionIcon /></Tooltip>);
+        feelings.forEach(function (value: any) {    
+          
+          if(value.Name === "Positive"){
+            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><InsertEmoticonIcon/></Tooltip>);
+          } else if(value.Name === "Neutral"){
+            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentSatisfiedIcon/></Tooltip>);
+          } else if(value.Name === "Negative"){
+            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentVeryDissatisfiedIcon/></Tooltip>);
+          }
+
         }); 
 
         if(status){
@@ -115,11 +125,15 @@ const columns: GridColDef[] = [
 
 ];
 
+
+
 export default (() => {
   
-  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [""], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [{}], url: "google.com", userDocumentReferences: [{}] }]);
 
   const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000'), []);
+
+  
 
   useEffect(() => {
     setData(files);

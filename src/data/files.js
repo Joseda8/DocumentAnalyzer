@@ -3,7 +3,7 @@ const files = [
     id: 1,
     title: 'Speech.pdf',
     status: true,
-    feelings: ["anger", "happiness", "sadness"],
+    feelings: [{"Name":"Positive","Score":34.33}, {"Name":"Negative","Score":61.33}, {"Name":"Neutral","Score":4.33}],
     obscene_language: false,
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
@@ -29,8 +29,8 @@ const files = [
 {
     id: 3,
     title: 'AnotherLetter.docx',
-    status: false,
-    feelings: ["sadness"],
+    status: true,
+    feelings: [{"Name":"Positive","Score":50}, {"Name":"Negative","Score":40}, {"Name":"Neutral","Score":10}],
     obscene_language: false,
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
