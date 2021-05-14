@@ -4,7 +4,6 @@ import { GridColDef, GridValueGetterParams } from "@material-ui/data-grid";
 import DataTable from "../../../helpers/table";
 import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
-import ExplicitIcon from '@material-ui/icons/Explicit';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import Tooltip from '@material-ui/core/Tooltip';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
@@ -107,20 +106,46 @@ const columns: GridColDef[] = [
     headerAlign: 'left',
     align: "left",
 
+    // renderCell: (params: GridValueGetterParams) => {
+    //     const status: boolean = !!params.getValue("status")!;
+    //     const is_obscene: boolean = !!params.getValue("obscene_language")!;
+
+    //     if(status){
+    //       if(is_obscene){
+    //         return <Tooltip title="This document contains obscene language"><ExplicitIcon /></Tooltip>
+    //       } else {
+    //         return <Tooltip title="This document is child friendly"><ChildFriendlyIcon /></Tooltip>
+    //       }
+    //     }
+
+    //     return <Typography>Not processed</Typography>
+    // }
+
     renderCell: (params: GridValueGetterParams) => {
-        const status: boolean = !!params.getValue("status")!;
-        const is_obscene: boolean = !!params.getValue("obscene_language")!;
+      const status: boolean = !!params.getValue("status")!;
+      const dirty_words: any = params.getValue("obscene_language")!;
 
-        if(status){
-          if(is_obscene){
-            return <Tooltip title="This document contains obscene language"><ExplicitIcon /></Tooltip>
-          } else {
-            return <Tooltip title="This document is child friendly"><ChildFriendlyIcon /></Tooltip>
-          }
+      var dirty_words_str: string = "";
+      for(const word of dirty_words){
+        dirty_words_str = dirty_words_str + `${word}, `;
+      }
+
+      dirty_words_str = dirty_words_str.slice(0, -2); 
+
+      if(status){
+        if(dirty_words.length === 0){
+          return <Tooltip title="This document is child friendly"><ChildFriendlyIcon /></Tooltip>
         }
+        return <GenericModal>
+                <h2>Offensive words detected</h2>
+                <hr/>
+                <p>{dirty_words_str}</p>
+              </GenericModal>;
+      }
+      return <Typography>Not processed</Typography>
+  }
 
-        return <Typography>Not processed</Typography>
-    }
+
   },
 
 ];
@@ -129,11 +154,9 @@ const columns: GridColDef[] = [
 
 export default (() => {
   
-  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [{}], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
   const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000'), []);
-
-  
 
   useEffect(() => {
     setData(files);
@@ -156,6 +179,8 @@ export default (() => {
   useEffect(() => {
     client.onmessage = (message) => {
       const received_data = JSON.parse(message.data.toString());
+
+      console.log(received_data);
 
       const new_rows: any = [];
       data.forEach(val => new_rows.push(Object.assign({}, val)));

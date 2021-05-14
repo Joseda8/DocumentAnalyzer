@@ -4,7 +4,7 @@ const files = [
     title: 'Speech.pdf',
     status: true,
     feelings: [{"Name":"Positive","Score":34.33}, {"Name":"Negative","Score":61.33}, {"Name":"Neutral","Score":4.33}],
-    obscene_language: false,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -17,7 +17,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: true,
     feelings: [],
-    obscene_language: true,
+    obscene_language: ["fuck","shit","motherfucker","crap"],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -31,7 +31,7 @@ const files = [
     title: 'AnotherLetter.docx',
     status: true,
     feelings: [{"Name":"Positive","Score":50}, {"Name":"Negative","Score":40}, {"Name":"Neutral","Score":10}],
-    obscene_language: false,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "Billie Joe Armstrong", qty: 15},
@@ -44,7 +44,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: false,
     feelings: [],
-    obscene_language: false,
+    obscene_language: ["fuck","shit","motherfucker","crap"],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -58,7 +58,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: true,
     feelings: [],
-    obscene_language: true,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -72,7 +72,7 @@ const files = [
     title: 'El quijote.txt',
     status: false,
     feelings: [],
-    obscene_language: false,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -86,7 +86,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: false,
     feelings: [],
-    obscene_language: true,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -100,7 +100,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: true,
     feelings: [],
-    obscene_language: false,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "José Montoya", qty: 8},
@@ -114,7 +114,7 @@ const files = [
     title: 'LoveLetter.txt',
     status: true,
     feelings: [],
-    obscene_language: true,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
     ],
@@ -125,7 +125,7 @@ const files = [
     title: 'HolyBlible.pdf',
     status: true,
     feelings: [],
-    obscene_language: false,
+    obscene_language: [],
     url: 'https://soafiles.blob.core.windows.net/files/REST_Tutorial.pdf',
     userDocumentReferences: [
         {name: "Dios", qty: 8888},
