@@ -8,6 +8,7 @@ import useStyles from "./style/general";
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { AuthService } from '../auth/AuthService';
 
 interface TabPanelProps {
   children?: any;
@@ -50,6 +51,13 @@ const NavBar = (props: any) => {
     setValue(newValue);
   };
 
+  const auth = AuthService.getInstance();
+  const onLogout = () => {
+    auth.logout();
+  }
+
+  console.log(auth.getToken());
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -62,7 +70,7 @@ const NavBar = (props: any) => {
             </Tabs>  
           </Grid>
           <Grid item style={{marginRight: 50}}>
-            <Link className={classes.link} to='/'><ExitToAppIcon></ExitToAppIcon></Link>
+            <Link onClick={onLogout} className={classes.link} to='/'><ExitToAppIcon></ExitToAppIcon></Link>
           </Grid>
         </Grid>      
       </AppBar>
