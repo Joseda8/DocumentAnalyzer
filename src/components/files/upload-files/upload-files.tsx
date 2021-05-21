@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { Input } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Button from "@material-ui/core/Button";
+import { urlAPI } from "../../../helpers/constants";
+import axios from 'axios';
 
 type MyProps = {
 };
@@ -81,17 +83,18 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
 
                 files_to_send.push({url: url, title: title});
             }); 
+
+            this.setErrorMessage("Files in storage");
             
             const body = {
                 files: [files_to_send],
             };
             
-            this.setErrorMessage("Files uploaded");
             console.log("BODY", body);
-            // axios.post(urlAPI + 'documents/notify', body).then((response) => {
-            //     //document.getElementById("message_to_user").innerHTML = "Server received the file successfully";
-            //     //console.log(response);
-            // });
+            axios.post(urlAPI + 'documents/notify', body).then((response) => {
+                console.log(response);
+                this.setErrorMessage("Files uploaded");
+            });
         });
       }
 

@@ -7,10 +7,12 @@ import { Typography } from '@material-ui/core';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import Tooltip from '@material-ui/core/Tooltip';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import files from "../../../data/files";
+// import files from "../../../data/files";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import axios from "axios";
+import { urlAPI } from "../../../helpers/constants";
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -159,7 +161,11 @@ export default (() => {
   const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000'), []);
 
   useEffect(() => {
-    setData(files);
+    //setData(files); // Descomentar para usar datos hardcode
+    axios.get(urlAPI + "documents").then((response) => {
+      console.log(response)
+      setData(response.data);
+    });
 
     client.onopen = () => {
       console.log('WebSocket Client Connected');

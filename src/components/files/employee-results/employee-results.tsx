@@ -6,7 +6,9 @@ import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SyncIcon from '@material-ui/icons/Sync';
-import employee from "../../../data/employee";
+// import employee from "../../../data/employee";
+import axios from 'axios';
+import { urlAPI } from "../../../helpers/constants";
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -58,29 +60,40 @@ const columns: GridColDef[] = [
 
 export default (() => {
 
-    const [data, setData] = useState([{id: 0, employeeName: "No employees", count: 0, documents: [{}] }]);
+  const [data, setData] = useState([{id: 0, employeeName: "No employees", count: 0, documents: [{}] }]);
 
-    useEffect(() => {
-      setData(employee);
-    }, [])
-
-    function onClick() {
-        const new_rows: any = [];
-        data.forEach(val => new_rows.push(Object.assign({}, val)));
-        new_rows[0].employeeName = "Obi Wan Kenobi";
-        new_rows.push({id: 0, employeeName: "Anakin Skywalker", count: 8, documents: [{name: "Episodio III", qty: 430}, {name: "Episodio VI", qty: 1138}] });
-        setData(new_rows);
-    }
-
-    return (
-        <>
-          <h2>
-            Results employees
-            <IconButton onClick={onClick}>
-              <SyncIcon />
-            </IconButton>
-          </h2>
-          <DataTable  rows={data} columns={columns} pageSize={5} height={400}/>
-        </>
+  function setNewData(){
+    axios.get(urlAPI + 'documents/users/count').then(
+        response => {
+          console.log(response);
+          setData(response.data);
+        }
     );
-  }) as React.SFC;
+  }
+
+  useEffect(() => {
+    // setData(employee); // Descomentar para usar datos hardcode
+    setNewData(); 
+  }, [])
+
+  function onClick() {
+    // const new_rows: any = [];
+    // data.forEach(val => new_rows.push(Object.assign({}, val)));
+    // new_rows[0].employeeName = "Obi Wan Kenobi";
+    // new_rows.push({id: 0, employeeName: "Anakin Skywalker", count: 8, documents: [{name: "Episodio III", qty: 430}, {name: "Episodio VI", qty: 1138}] });
+    // setData(new_rows);
+    setNewData();
+  }
+
+  return (
+      <>
+        <h2>
+          Results employees
+          <IconButton onClick={onClick}>
+            <SyncIcon />
+          </IconButton>
+        </h2>
+        <DataTable  rows={data} columns={columns} pageSize={5} height={400}/>
+      </>
+  );
+}) as React.SFC;
