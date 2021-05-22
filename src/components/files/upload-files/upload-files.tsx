@@ -86,12 +86,8 @@ export default class UploadFiles extends React.Component<MyProps, MyState> {
 
             this.setErrorMessage("Files in storage");
             
-            const body = {
-                files: [files_to_send],
-            };
-            
-            console.log("BODY", body);
-            axios.post(urlAPI + 'documents/notify', body).then((response) => {
+            console.log("BODY", files_to_send);
+            axios.post(urlAPI + 'documents/notify', files_to_send).then((response) => {
                 console.log(response);
                 this.setErrorMessage("Files uploaded");
             });

@@ -6,7 +6,7 @@ import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import Tooltip from '@material-ui/core/Tooltip';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+//import { w3cwebsocket as W3CWebSocket } from "websocket";
 // import files from "../../../data/files";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -156,9 +156,9 @@ const columns: GridColDef[] = [
 
 export default (() => {
   
-  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
-  const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000'), []);
+  const client = useMemo(() => new WebSocket('ws://127.0.0.1:8765'), []);
 
   useEffect(() => {
     //setData(files); // Descomentar para usar datos hardcode

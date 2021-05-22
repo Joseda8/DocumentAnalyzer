@@ -65,7 +65,10 @@ export default (() => {
   function setNewData(){
     axios.get(urlAPI + 'documents/users/count').then(
         response => {
-          console.log(response);
+          response.data.forEach( (element: any, index: number) => {
+            element["id"] = index;
+          });
+          console.log(response.data);
           setData(response.data);
         }
     );
