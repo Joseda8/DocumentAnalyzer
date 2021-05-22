@@ -79,12 +79,12 @@ const columns: GridColDef[] = [
         const items: JSX.Element[] = [];
         feelings.forEach(function (value: any) {    
           
-          if(value.Name === "Positive"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><InsertEmoticonIcon/></Tooltip>);
-          } else if(value.Name === "Neutral"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentSatisfiedIcon/></Tooltip>);
-          } else if(value.Name === "Negative"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentVeryDissatisfiedIcon/></Tooltip>);
+          if(value.name === "Positive"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><InsertEmoticonIcon/></Tooltip>);
+          } else if(value.name === "Neutral"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><SentimentSatisfiedIcon/></Tooltip>);
+          } else if(value.name === "Negative"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><SentimentVeryDissatisfiedIcon/></Tooltip>);
           }
 
         }); 
@@ -100,7 +100,7 @@ const columns: GridColDef[] = [
   },
 
   {
-    field: 'obscene_language',
+    field: 'offensiveContent',
     headerName: 'Obscene language',
     description: 'This column is not sortable.',
     sortable: false,
@@ -110,7 +110,7 @@ const columns: GridColDef[] = [
 
     // renderCell: (params: GridValueGetterParams) => {
     //     const status: boolean = !!params.getValue("status")!;
-    //     const is_obscene: boolean = !!params.getValue("obscene_language")!;
+    //     const is_obscene: boolean = !!params.getValue("offensiveContent")!;
 
     //     if(status){
     //       if(is_obscene){
@@ -125,7 +125,7 @@ const columns: GridColDef[] = [
 
     renderCell: (params: GridValueGetterParams) => {
       const status: boolean = !!params.getValue("status")!;
-      const dirty_words: any = params.getValue("obscene_language")!;
+      const dirty_words: any = params.getValue("offensiveContent")!;
 
       var dirty_words_str: string = "";
       for(const word of dirty_words){
@@ -156,7 +156,7 @@ const columns: GridColDef[] = [
 
 export default (() => {
   
-  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], offensiveContent: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
   const client = useMemo(() => new WebSocket('ws://127.0.0.1:8765'), []);
 
@@ -180,7 +180,7 @@ export default (() => {
     }
 
   }, [client]);
-
+ 
   
   useEffect(() => {
     client.onmessage = (message) => {
