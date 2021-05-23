@@ -6,11 +6,13 @@ import GenericModal from "../../../helpers/generic-modal";
 import { Typography } from '@material-ui/core';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import Tooltip from '@material-ui/core/Tooltip';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-import files from "../../../data/files";
+//import { w3cwebsocket as W3CWebSocket } from "websocket";
+// import files from "../../../data/files";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import axios from "axios";
+import { urlAPI } from "../../../helpers/constants";
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -77,12 +79,12 @@ const columns: GridColDef[] = [
         const items: JSX.Element[] = [];
         feelings.forEach(function (value: any) {    
           
-          if(value.Name === "Positive"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><InsertEmoticonIcon/></Tooltip>);
-          } else if(value.Name === "Neutral"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentSatisfiedIcon/></Tooltip>);
-          } else if(value.Name === "Negative"){
-            items.push(<Tooltip title={`${value.Name}: ${value.Score}%`}><SentimentVeryDissatisfiedIcon/></Tooltip>);
+          if(value.name === "Positive"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><InsertEmoticonIcon/></Tooltip>);
+          } else if(value.name === "Neutral"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><SentimentSatisfiedIcon/></Tooltip>);
+          } else if(value.name === "Negative"){
+            items.push(<Tooltip title={`${value.name}: ${value.score}%`}><SentimentVeryDissatisfiedIcon/></Tooltip>);
           }
 
         }); 
@@ -98,7 +100,7 @@ const columns: GridColDef[] = [
   },
 
   {
-    field: 'obscene_language',
+    field: 'offensiveContent',
     headerName: 'Obscene language',
     description: 'This column is not sortable.',
     sortable: false,
@@ -108,7 +110,7 @@ const columns: GridColDef[] = [
 
     // renderCell: (params: GridValueGetterParams) => {
     //     const status: boolean = !!params.getValue("status")!;
-    //     const is_obscene: boolean = !!params.getValue("obscene_language")!;
+    //     const is_obscene: boolean = !!params.getValue("offensiveContent")!;
 
     //     if(status){
     //       if(is_obscene){
@@ -123,7 +125,7 @@ const columns: GridColDef[] = [
 
     renderCell: (params: GridValueGetterParams) => {
       const status: boolean = !!params.getValue("status")!;
-      const dirty_words: any = params.getValue("obscene_language")!;
+      const dirty_words: any = params.getValue("offensiveContent")!;
 
       var dirty_words_str: string = "";
       for(const word of dirty_words){
@@ -154,12 +156,16 @@ const columns: GridColDef[] = [
 
 export default (() => {
   
-  const [data, setData] = useState([{id: 0, title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], offensiveContent: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
-  const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000'), []);
+  const client = useMemo(() => new WebSocket('ws://127.0.0.1:8765'), []);
 
   useEffect(() => {
-    setData(files);
+    //setData(files); // Descomentar para usar datos hardcode
+    axios.get(urlAPI + "documents").then((response) => {
+      console.log(response)
+      setData(response.data);
+    });
 
     client.onopen = () => {
       console.log('WebSocket Client Connected');
@@ -174,7 +180,7 @@ export default (() => {
     }
 
   }, [client]);
-
+ 
   
   useEffect(() => {
     client.onmessage = (message) => {
