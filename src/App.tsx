@@ -48,6 +48,7 @@ function App() {
               
             </Switch>
           </Router>
+          <p>APIURL: {window._env_.URLAPI}</p>
       </MuiThemeProvider>
   );
 
