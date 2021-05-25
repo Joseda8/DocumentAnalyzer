@@ -7,6 +7,8 @@ import LogIn from "./components/home/login/login";
 import SignUp from "./components/home/sign_up/sign_up";
 import Files from "./components/files/index";
 
+import { urlAPI } from './helpers/constants';
+
 const theme = createMuiTheme({
   palette: {
 
@@ -48,7 +50,7 @@ function App() {
               
             </Switch>
           </Router>
-          <p>APIURL: {window._env_.URLAPI}</p>
+          <p>APIURL: {urlAPI}</p>
       </MuiThemeProvider>
   );
 
