@@ -7,7 +7,6 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 // import SignUp from "./components/home/sign_up/sign_up";
 import Files from "./components/files/index";
 
-import { urlAPI } from './helpers/constants';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,7 +33,6 @@ function App() {
               <Route exact path="/files" component={Files} />
             </Switch>
           </Router>
-          <p>APIURL: {urlAPI}</p>
       </MuiThemeProvider>
   );
 
