@@ -12,7 +12,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import axios from "axios";
-import { urlAPI } from "../../../helpers/constants";
+import { urlAPI, WEB_SOCKET } from "../../../helpers/constants";
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', width: 70 },
@@ -158,7 +158,7 @@ export default (() => {
   
   const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], offensiveContent: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
-  const client = useMemo(() => new WebSocket('ws://127.0.0.1:8765'), []);
+  const client = useMemo(() => new WebSocket(WEB_SOCKET), []);
 
   useEffect(() => {
     //setData(files); // Descomentar para usar datos hardcode
