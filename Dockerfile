@@ -38,3 +38,4 @@ CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env-prod.sh && nginx -g \"daemon 
 # docker image build . -t arturocv/docanalyzer-frontend
 # docker push arturocv/docanalyzer-frontend
 # docker run -d -p 6413:80 arturocv/docanalyzer-frontend
+# docker run -e DOCANALYZER_HOST=localhost -e DOCANALYZER_PORT=3033 -e WEBSOCKET_HOST=localhost -e WEBSOCKET_PORT=8765 -p 6413:80 arturocv/docanalyzer-frontend

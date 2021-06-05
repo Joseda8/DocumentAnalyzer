@@ -56,7 +56,7 @@ const NavBar = (props: any) => {
     auth.logout();
   }
 
-  console.log(auth.getToken());
+  // console.log(auth.getToken());
 
   return (
     <div className={classes.root}>
