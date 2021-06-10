@@ -7,7 +7,8 @@ export default class BlobStorage {
     containerClient: any;
 
     constructor() {
-        var blobSasUrl = "";
+        //var blobSasUrl = "";
+        const blobSasUrl = 'https://soafiles.blob.core.windows.net/files?sp=racwdl&st=2021-04-30T21:44:27Z&se=2021-06-16T05:44:27Z&sv=2020-02-10&sr=c&sig=kpTVVN2JZryg0FrW4fxWmFURSo0yUbkVtZZrS4e2dws%3D';
         var blobServiceClient;
 
         axios.get(urlAPI + 'object').then(
