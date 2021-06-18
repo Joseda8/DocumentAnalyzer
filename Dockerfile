@@ -25,17 +25,22 @@ WORKDIR /usr/share/nginx/html
 COPY ./env-prod.sh .
 COPY .env .
 
+# Copy keycloak .env and bash script to container
+COPY ./keycloak-prod.sh .
+COPY ./keycloak.env .
+
 # Add bash
 RUN apk add --no-cache bash
 
 # Make our shell script executable
 RUN chmod +x env-prod.sh
+RUN chmod +x keycloak-prod.sh
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env-prod.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env-prod.sh && /usr/share/nginx/html/keycloak-prod.sh && nginx -g \"daemon off;\""]
 
 
 # docker image build . -t arturocv/docanalyzer-frontend
 # docker push arturocv/docanalyzer-frontend
 # docker run -d -p 6413:80 arturocv/docanalyzer-frontend
-# docker run -e DOCANALYZER_HOST=localhost -e DOCANALYZER_PORT=3033 -e WEBSOCKET_HOST=localhost -e WEBSOCKET_PORT=8765 -p 6413:80 arturocv/docanalyzer-frontend
+# docker run -e DOCANALYZER_HOST=10.99.126.214 -e DOCANALYZER_PORT=80 -e WEBSOCKET_HOST=10.105.211.239 -e WEBSOCKET_PORT=8765 -e REALM=docanalyzer -e AUTHSERVERURL=10.102.164.168 -e AUTHSERVERPORT=8080 -p 3000:80 arturocv/docanalyzer-frontend
