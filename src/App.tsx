@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 // import SignUp from "./components/home/sign_up/sign_up";
 import Files from "./components/files/index";
 
+
 const theme = createMuiTheme({
   palette: {
 

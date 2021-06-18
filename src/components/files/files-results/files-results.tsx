@@ -125,7 +125,9 @@ const columns: GridColDef[] = [
 
     renderCell: (params: GridValueGetterParams) => {
       const status: boolean = !!params.getValue("status")!;
-      const dirty_words: any = params.getValue("offensiveContent")!;
+      const dirty_words: any = params.getValue("obscene_language")!;
+      // console.log("DirtyWords: ", dirty_words)
+      
 
       var dirty_words_str: string = "";
       for(const word of dirty_words){
@@ -156,23 +158,23 @@ const columns: GridColDef[] = [
 
 export default (() => {
   
-  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], offensiveContent: [""], url: "google.com", userDocumentReferences: [{}] }]);
+  const [data, setData] = useState([{id: "0", title: "No files", status: false, feelings: [{}], obscene_language: [""], url: "google.com", userDocumentReferences: [{}] }]);
 
   const client = useMemo(() => new WebSocket(WEB_SOCKET), []);
 
   useEffect(() => {
     //setData(files); // Descomentar para usar datos hardcode
     axios.get(urlAPI + "documents").then((response) => {
-      console.log(response)
+      // console.log("Http ", response.data)
       setData(response.data);
     });
 
     client.onopen = () => {
-      console.log('WebSocket Client Connected');
+      //console.log('WebSocket Client Connected');
     };
 
     client.onclose = () => {
-      console.log('WebSocket Client Disconnected');
+      //console.log('WebSocket Client Disconnected');
     };
 
     return () => {
@@ -180,13 +182,22 @@ export default (() => {
     }
 
   }, [client]);
- 
   
   useEffect(() => {
     client.onmessage = (message) => {
-      const received_data = JSON.parse(message.data.toString());
+      let response = message.data.toString();
+      const received_data = JSON.parse(response);
+      /* response = response.replace("Name","name");
+      response = response.replace("Score","score");
+      
+      const feelings_wrong = received_data.feelings;
+      for (let feel of feelings_wrong) {
+        feel = renameKey(feel, "Name", "name");
+        feel = renameKey(feel, "Score", "score");
 
-      console.log(received_data);
+      }*/
+
+      // console.log("WebSocket: ", received_data);
 
       const new_rows: any = [];
       data.forEach(val => new_rows.push(Object.assign({}, val)));
@@ -220,3 +231,19 @@ export default (() => {
       </>
   );
 }) as React.SFC;
+/*
+function renameKey(object: any, key: any, newKey: any) {
+
+  const clonedObj = {...object};
+
+  const targetKey = clonedObj[key];
+
+
+
+  delete clonedObj[key];
+
+  clonedObj[newKey] = targetKey;
+
+  return clonedObj;
+
+};*/

@@ -12,7 +12,7 @@ export default class BlobStorage {
 
         axios.get(urlAPI + 'object').then(
             response => {
-              console.log(response.data);
+              //console.log(response.data);
               blobSasUrl = response.data;
               blobServiceClient = new BlobServiceClient(blobSasUrl);
               this.containerClient = blobServiceClient.getContainerClient("");
