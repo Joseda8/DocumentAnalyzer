@@ -68,7 +68,7 @@ export default (() => {
           response.data.forEach( (element: any, index: number) => {
             element["id"] = index;
           });
-          console.log(response.data);
+          //console.log(response.data);
           setData(response.data);
         }
     );

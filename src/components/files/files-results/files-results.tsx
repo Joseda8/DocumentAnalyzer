@@ -170,11 +170,11 @@ export default (() => {
     });
 
     client.onopen = () => {
-      console.log('WebSocket Client Connected');
+      //console.log('WebSocket Client Connected');
     };
 
     client.onclose = () => {
-      console.log('WebSocket Client Disconnected');
+      //console.log('WebSocket Client Disconnected');
     };
 
     return () => {
